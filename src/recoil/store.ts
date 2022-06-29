@@ -1,13 +1,8 @@
-import { atom, selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 
 export const shoppingCart = atom({
   key: 'shoppingCart',
-  default: [
-    {
-      id: 0,
-      quantity: 5,
-    },
-  ],
+  default: [],
 });
 
 export const quantityById = selectorFamily({
@@ -25,4 +20,12 @@ export const quantityById = selectorFamily({
       const indexOfProduct = cart.indexOf(product);
       return cart[indexOfProduct].quantity;
     },
+});
+
+export const quantitySum = selector({
+  key: 'quantitySum',
+  get: ({ get }) => {
+    const cart = get(shoppingCart);
+    return cart.reduce((sum, item) => sum + item.quantity, 0);
+  },
 });

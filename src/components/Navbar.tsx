@@ -1,7 +1,11 @@
 import { Button, Container, Nav, Navbar as BSNavbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { quantitySum } from '../recoil/store';
 
 export default function Navbar() {
+  const cartQuantitySum = useRecoilValue(quantitySum);
+
   return (
     <BSNavbar sticky="top" className="bg-white shadow mb-3">
       <Container>
@@ -44,19 +48,21 @@ export default function Navbar() {
                 <circle cx="254.701" cy="342.742" r="34.989" />
               </g>
             </svg>
-            <div
-              className="rounded-circle bg-danger d-flex justify-content-center align-items-center"
-              style={{
-                color: 'white',
-                width: '1.5rem',
-                height: '1.5rem',
-                bottom: 0,
-                right: 0,
-                position: 'absolute',
-              }}
-            >
-              3
-            </div>
+            {cartQuantitySum > 0 ? (
+              <div
+                className="rounded-circle bg-danger d-flex justify-content-center align-items-center"
+                style={{
+                  color: 'white',
+                  width: '1.5rem',
+                  height: '1.5rem',
+                  bottom: 0,
+                  right: 0,
+                  position: 'absolute',
+                }}
+              >
+                {cartQuantitySum}
+              </div>
+            ) : null}
           </Button>
         </div>
       </Container>
