@@ -1,4 +1,11 @@
-import { atom, selector, selectorFamily } from 'recoil';
+import { atom, RecoilState, selector, selectorFamily } from 'recoil';
+
+type shoppingCartContent = Array<{ id: number; quantity: number }>;
+
+type shoppingCart = RecoilState<{
+  key: 'string';
+  default: shoppingCartContent;
+}>;
 
 export const shoppingCart = atom({
   key: 'shoppingCart',

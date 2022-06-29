@@ -1,9 +1,15 @@
+import { ReactElement, useState } from 'react';
 import { Button, Container, Nav, Navbar as BSNavbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { quantitySum } from '../recoil/store';
 
-export default function Navbar() {
+interface navbarProps {
+  openCart: () => void;
+  closeCart: () => void;
+}
+
+const Navbar: React.FC<navbarProps> = (props: navbarProps) => {
   const cartQuantitySum = useRecoilValue(quantitySum);
 
   return (
@@ -30,6 +36,7 @@ export default function Navbar() {
             }}
             variant="outline-primary"
             className="rounded-circle"
+            onClick={props.openCart}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,4 +75,6 @@ export default function Navbar() {
       </Container>
     </BSNavbar>
   );
-}
+};
+
+export default Navbar;
