@@ -2,6 +2,7 @@ import { Button, Card } from 'react-bootstrap';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { formatCurrency } from '../utilities/formatCurrency';
 import { shoppingCart, quantityById } from '../recoil/store';
+import { manipulateQuantity, removeFromCart } from '../functions';
 
 type StoreItemProps = {
   id: number;
@@ -14,43 +15,6 @@ export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
   const [cart, setCart] = useRecoilState(shoppingCart);
   const quantity = useRecoilValue(quantityById(id));
 
-  const manipulateQuantity = (id: number, operation: number): void => {
-    //operation -1 | 1
-    //if operation is -1, the quantity decrements
-    //if operation is 1, the quantity increments
-
-    let cartCopy = Array.from(cart);
-
-    let product: { id: number; quantity: number } | undefined = cartCopy.find(
-      (product) => product.id === id,
-    );
-
-    if (product) {
-      let index = cart.indexOf(product);
-      cartCopy[index] = { id: id, quantity: product.quantity + operation };
-      if (cartCopy[index].quantity === 0) {
-        cartCopy.splice(index, 1);
-      }
-    } else {
-      cartCopy.push({ id: id, quantity: 1 });
-    }
-
-    setCart(cartCopy);
-  };
-
-  const removeFromCart = (id: number) => {
-    let cartCopy = Array.from(cart);
-
-    let product: { id: number; quantity: number } | undefined = cart.find(
-      (product) => product.id === id,
-    );
-
-    if (!product) {
-      throw new Error('removeFromCart: id was not found in cart');
-    }
-    cartCopy.splice(cartCopy.indexOf(product), 1);
-    setCart(cartCopy);
-  };
   return (
     <Card className="h-100">
       <Card.Img
@@ -69,7 +33,7 @@ export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
             <Button
               className="w-100"
               onClick={() => {
-                manipulateQuantity(id, 1);
+                manipulateQuantity(cart, id, 1, setCart);
               }}
             >
               +Add to cart
@@ -85,7 +49,7 @@ export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
               >
                 <Button
                   onClick={() => {
-                    manipulateQuantity(id, -1);
+                    manipulateQuantity(cart, id, -1, setCart);
                   }}
                 >
                   -
@@ -95,7 +59,7 @@ export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                 </div>
                 <Button
                   onClick={() => {
-                    manipulateQuantity(id, 1);
+                    manipulateQuantity(cart, id, 1, setCart);
                   }}
                 >
                   +
@@ -105,7 +69,7 @@ export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                 variant="danger"
                 size="sm"
                 onClick={() => {
-                  removeFromCart(id);
+                  removeFromCart(cart, setCart, id);
                 }}
               >
                 Remove

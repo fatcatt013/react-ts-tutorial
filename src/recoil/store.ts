@@ -1,6 +1,6 @@
 import { atom, RecoilState, selector, selectorFamily } from 'recoil';
 
-type shoppingCartContent = Array<{ id: number; quantity: number }>;
+export type shoppingCartContent = Array<{ id: number; quantity: number }>;
 
 type shoppingCart = RecoilState<{
   key: 'string';
