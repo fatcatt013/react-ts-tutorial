@@ -1,4 +1,5 @@
 import { atom, RecoilState, selector, selectorFamily } from 'recoil';
+import storeItems from '../data/items.json';
 
 export type shoppingCartContent = Array<{ id: number; quantity: number }>;
 
@@ -34,5 +35,23 @@ export const quantitySum = selector({
   get: ({ get }) => {
     const cart = get(shoppingCart);
     return cart.reduce((sum, item) => sum + item.quantity, 0);
+  },
+});
+
+export const totalSum = selector({
+  key: 'totalSum',
+  get: ({ get }) => {
+    const cart = get(shoppingCart);
+    let totalPrice: number = 0;
+
+    cart.forEach((item) => {
+      let dataEntry = storeItems.find((product) => item.id === product.id);
+
+      if (dataEntry === undefined) {
+        throw new Error('totalSum: the product is not listed in data.json');
+      }
+      totalPrice += item.quantity * dataEntry.price;
+    });
+    return totalPrice;
   },
 });
