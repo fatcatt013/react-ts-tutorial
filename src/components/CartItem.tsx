@@ -20,6 +20,7 @@ const CartItem: React.FC<cartItemProps> = (props: cartItemProps) => {
       direction="horizontal"
       gap={2}
       className="d-flex align-items-center "
+      testid="cartItem"
     >
       <img
         src={item.imgUrl}

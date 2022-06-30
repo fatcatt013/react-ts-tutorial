@@ -37,6 +37,7 @@ const Navbar: React.FC<navbarProps> = (props: navbarProps) => {
             variant="outline-primary"
             className="rounded-circle"
             onClick={props.openCart}
+            testid="cartBtn"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

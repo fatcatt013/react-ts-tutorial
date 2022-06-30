@@ -6,7 +6,7 @@ export default function Store() {
   return (
     <div>
       <h1 style={{ marginBottom: '2rem' }}>Store</h1>
-      <Row md={2} xs={1} lg={3} className="g-3">
+      <Row md={2} xs={1} lg={3} className="store-contents g-3">
         {storeItems.map((item) => (
           <Col key={item.id}>
             <StoreItem {...item} />
