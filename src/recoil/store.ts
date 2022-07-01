@@ -1,5 +1,5 @@
 import { atom, RecoilState, selector, selectorFamily } from 'recoil';
-import storeItems from '../data/items.json';
+import Axios from 'axios';
 
 export type shoppingCartContent = Array<{ id: number; quantity: number }>;
 
@@ -8,6 +8,12 @@ type shoppingCart = RecoilState<{
   default: shoppingCartContent;
 }>;
 
+const getProducts = async () => {
+  const storeItems = await Axios.get('http://localhost:5000/products');
+  return [storeItems.data];
+};
+
+const storeItems = (await getProducts())[0];
 export const shoppingCart = atom({
   key: 'shoppingCart',
   default: [],
