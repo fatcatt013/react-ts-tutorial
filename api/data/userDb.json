@@ -1,15 +1,1 @@
-[
-  {
-    "id": 1,
-    "username": "admin",
-    "email": "admin@gmail.com",
-    "password": "admin"
-  },
-
-  {
-    "id": 2,
-    "username": "matej",
-    "email": "matej@gmail.com",
-    "password": "matej"
-  }
-]
+[{"id": 1, "username": "admin", "email": "admin@gmail.com", "password": "admin"}, {"id": 2, "username": "matej", "email": "matej@gmail.com", "password": "matej"}, {"id": 3, "username": "kok", "email": "lmao", "password": "kok"}, {"id": 4, "username": "ahmed", "email": "ahmed@gmail.com", "password": "ahmed"}]

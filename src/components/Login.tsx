@@ -20,7 +20,6 @@ const Login: React.FC<{
     });
     setLoginInfo({ logged: true, ...res.data });
     console.log(loginInfo);
-    debugger;
   };
 
   return (
