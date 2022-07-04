@@ -1,23 +1,80 @@
 import { atom, RecoilState, selector, selectorFamily } from 'recoil';
 import Axios from 'axios';
 
+/*
+===========
+TYPES
+===========
+*/
 export type shoppingCartContent = Array<{ id: number; quantity: number }>;
+
+type product = {
+  id: number;
+  name: string;
+  price: number;
+  imgUrl: string;
+};
+
+type productList = product[] | [];
 
 type shoppingCart = RecoilState<{
   key: 'string';
   default: shoppingCartContent;
 }>;
 
+type loginInfoAtomType = {
+  key: 'loginData';
+  default:
+    | {
+        logged: boolean;
+      }
+    | {
+        logged: boolean;
+        id: number;
+        username: string;
+        email: string;
+      };
+};
+
+/*
+===========
+FUNCTIONS
+===========
+*/
+
 const getProducts = async () => {
   const storeItems = await Axios.get('http://localhost:5000/products');
   return [storeItems.data];
 };
 
-const storeItems = (await getProducts())[0];
-export const shoppingCart = atom({
+/*
+===========
+CONSTANTS
+===========
+*/
+export const storeItems: productList = (await getProducts())[0];
+
+/*
+===========
+ATOMS
+===========
+*/
+
+export const shoppingCart = atom<shoppingCart>({
   key: 'shoppingCart',
   default: [],
 });
+
+export const loginData = atom({
+  key: 'loginData',
+  default: { logged: false },
+});
+
+/*
+===========
+SELECTORS
+===========
+*/
 
 export const quantityById = selectorFamily({
   key: 'quantityById',

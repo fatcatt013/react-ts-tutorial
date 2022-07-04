@@ -1,9 +1,9 @@
 import { removeFromCart } from '../functions';
-import storeItems from '../data/items.json';
 import { Button, Stack } from 'react-bootstrap';
 import { formatCurrency } from '../utilities/formatCurrency';
 import { shoppingCart } from '../recoil/store';
 import { useRecoilState } from 'recoil';
+import { storeItems } from '../recoil/store';
 
 interface cartItemProps {
   id: number;
