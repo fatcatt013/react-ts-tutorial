@@ -1,6 +1,15 @@
+import * as cypress from 'cypress';
+
 describe('Shopping UI test', () => {
   it('Testing the Home page', () => {
     cy.visit('http://localhost:3000/');
+    cy.get('[testid=login-email-input]').invoke(
+      'attr',
+      'value',
+      'admin@gmail.com',
+    );
+    cy.get('[testid=login-password-input]').invoke('attr', 'value', 'admin');
+    cy.contains('Log In').click();
     cy.contains('Welcome to Little Happy Shop');
     cy.contains('Why you should shop here?');
     cy.contains('Returning things is simple');
@@ -9,6 +18,13 @@ describe('Shopping UI test', () => {
   describe('Testing the store page', () => {
     it('Testing the stuff list', () => {
       cy.visit('http://localhost:3000/');
+      cy.get('[testid=login-email-input]').invoke(
+        'attr',
+        'value',
+        'admin@gmail.com',
+      );
+      cy.get('[testid=login-password-input]').invoke('attr', 'value', 'admin');
+      cy.contains('Log In').click();
       cy.contains('Store').click();
       cy.contains('+Add to cart').click();
       cy.contains('1 in cart');

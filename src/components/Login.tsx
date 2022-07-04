@@ -38,6 +38,7 @@ const Login: React.FC<{
         onChange={(e) => {
           setEmail(e.target.value);
         }}
+        testid="login-email-input"
       />
       <input
         type="password"
@@ -46,6 +47,7 @@ const Login: React.FC<{
         onChange={(e) => {
           setPassword(e.target.value);
         }}
+        testid="login-password-input"
       />
       <Button type="submit">Log In</Button>
       <Button
