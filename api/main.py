@@ -2,13 +2,16 @@ from flask import Flask, request;
 from flask_restful import Api, Resource;
 import json
 from flask_cors import CORS
+import os
+
+print(os.getcwd())
 
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-productsData = json.load(open('api/data/products.json'))
-userDb = json.load(open('api/data/userDb.json'))
+productsData = json.load(open('data/products.json'))
+userDb = json.load(open('data/userDb.json'))
 
 def countId():
     maxId = 0
@@ -57,4 +60,4 @@ api.add_resource(Login, '/login')
 api.add_resource(Register, '/register')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
