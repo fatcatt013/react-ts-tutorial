@@ -1,5 +1,6 @@
 import { atom, RecoilState, selector, selectorFamily } from 'recoil';
 import Axios from 'axios';
+import apiConfig from '../../config/frontend-cfg.json';
 
 /*
 ===========
@@ -43,7 +44,7 @@ FUNCTIONS
 */
 
 const getProducts = async () => {
-  const storeItems = await Axios.get('http://localhost:90/api/products');
+  const storeItems = await Axios.get(apiConfig.FLASK_SERVER_PATH + '/products');
   return [storeItems.data];
 };
 

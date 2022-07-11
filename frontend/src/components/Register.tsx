@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import apiConfig from '../../config/frontend-cfg.json';
 
 const Register: React.FC<{
   register: boolean;
@@ -12,7 +13,7 @@ const Register: React.FC<{
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await Axios.put('http://localhost:90/api/register', {
+    const res = await Axios.put(apiConfig.FLASK_SERVER_PATH + '/register', {
       email: email,
       password: password,
       username: username,

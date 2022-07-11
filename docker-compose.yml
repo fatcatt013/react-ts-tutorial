@@ -3,8 +3,11 @@ version: '3.8'
 services:
   web:
     build: ./frontend
+    volumes:
+      - ./frontend-config:/app/config
   api:
     build: 'api'
+
   nginx:
     build: nginx
     volumes:

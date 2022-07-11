@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import Axios from 'axios';
 import { SetterOrUpdater, useRecoilState } from 'recoil';
 import { loginData } from '../recoil/store';
+import apiConfig from '../../config/frontend-cfg.json';
 
 const Login: React.FC<{
   register: boolean;
@@ -14,7 +15,7 @@ const Login: React.FC<{
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await Axios.post('http://localhost:90/api/login', {
+    const res = await Axios.post(apiConfig.FLASK_SERVER_PATH + '/login', {
       email: email,
       password: password,
     });
