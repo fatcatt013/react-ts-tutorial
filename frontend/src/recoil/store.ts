@@ -43,7 +43,7 @@ FUNCTIONS
 */
 
 const getProducts = async () => {
-  const storeItems = await Axios.get('http://localhost:5000/products');
+  const storeItems = await Axios.get('http://localhost:90/api/products');
   return [storeItems.data];
 };
 

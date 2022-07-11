@@ -1,0 +1,10 @@
+server {
+    location / {
+        proxy_pass http://shopping-cart-web-1:3000/;
+    }
+
+    location /api {
+        proxy_pass http://shopping-cart-api-1:5000/;
+    }
+}
+

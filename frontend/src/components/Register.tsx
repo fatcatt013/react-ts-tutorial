@@ -12,7 +12,7 @@ const Register: React.FC<{
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await Axios.put('http://localhost:5000/register', {
+    const res = await Axios.put('http://localhost:90/api/register', {
       email: email,
       password: password,
       username: username,

@@ -14,7 +14,7 @@ const Login: React.FC<{
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await Axios.post('http://localhost:5000/login', {
+    const res = await Axios.post('http://localhost:90/api/login', {
       email: email,
       password: password,
     });
