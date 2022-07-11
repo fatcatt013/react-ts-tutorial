@@ -7,5 +7,7 @@ services:
     build: 'api'
   nginx:
     build: nginx
+    volumes:
+      - ./nginx/config:/etc/nginx/sites-available
     ports:
       - '90:80'
